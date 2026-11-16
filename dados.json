@@ -1,5 +1,5 @@
 {
- "atualizado_em": "2026-11-16T12:24:48+00:00",
+ "atualizado_em": "2026-11-16T12:38:29+00:00",
  "minimo_semana": 30,
  "teto_video": 0.1,
  "classificacao_pronta": true,
@@ -228,6 +228,30 @@
      }
     }
    ],
+   "total": {
+    "publico": {
+     "textos": 2573,
+     "fora": 678,
+     "n": 1895,
+     "pos": 32.6,
+     "neg": 62.7,
+     "neu": 4.6,
+     "saldo": -30.1,
+     "margem": 4.2,
+     "amostra_baixa": false
+    },
+    "mercado": {
+     "textos": 126,
+     "fora": 2,
+     "n": 124,
+     "pos": 18.5,
+     "neg": 47.6,
+     "neu": 33.9,
+     "saldo": -29.0,
+     "margem": 13.4,
+     "amostra_baixa": false
+    }
+   },
    "encerrado_na_semana": null,
    "precos": {
     "vespera": "2026-09-24",
@@ -662,6 +686,30 @@
      }
     }
    ],
+   "total": {
+    "publico": {
+     "textos": 1827,
+     "fora": 419,
+     "n": 1408,
+     "pos": 20.6,
+     "neg": 70.1,
+     "neu": 9.3,
+     "saldo": -49.4,
+     "margem": 4.4,
+     "amostra_baixa": false
+    },
+    "mercado": {
+     "textos": 101,
+     "fora": 3,
+     "n": 98,
+     "pos": 16.3,
+     "neg": 34.7,
+     "neu": 49.0,
+     "saldo": -18.4,
+     "margem": 13.7,
+     "amostra_baixa": false
+    }
+   },
    "encerrado_na_semana": null,
    "precos": {
     "vespera": "2026-09-16",
@@ -910,6 +958,10 @@
   ],
   "nota_concordancia": "Os 300 textos da base foram rotulados por uma pessoa da liga. A concordância (κ) foi medida contra uma segunda rotulagem às cegas, feita por um assistente de IA antes de ver os rótulos humanos, e não por um segundo analista humano. Nas divergências, valeu o rótulo humano, revisado pelas regras do guia.",
   "filtro_fora": "O Público conta comentários que falam de outro assunto. Na validação, a pessoa que rotulou achou posição sobre a decisão em 15 dos 50 comentários sorteados, e o modelo contou 39: 24 deles eram, para a pessoa, fora do tema (por exemplo, ataques ou elogios ao governo sem citar a decisão). Quando o modelo marca um comentário como fora do tema, quase sempre acerta. Separar melhor o que é fora do tema é a primeira melhoria prevista.",
+  "ressalvas": {
+   "publico": "Muitos dos comentários contados falam do governo em geral, e não da decisão. O modelo ainda não consegue separar todos eles.",
+   "mercado": "O modelo tende a ver as notícias como mais contrárias do que uma leitura humana, cerca de 10 pontos a mais. Leia como tendência."
+  },
   "limitacoes": [
    "Reação online não é a opinião da população: os números vêm de comentários do YouTube e de notícias de quatro portais (InfoMoney, Money Times, Seu Dinheiro e Exame).",
    "No Público, o modelo lê até 400 comentários sorteados por semana, entre todos os coletados, e nenhum vídeo pesa mais de 10% de uma semana (a margem de erro já considera esse ajuste).",
