@@ -133,7 +133,7 @@ function escolherEvento(i) {
   const det = document.getElementById('evento-detalhe');
   const n = ev.semanas.length;
   // A reação só ganha semanas novas na rotina de sexta; os preços mudam todo dia.
-  const reacao = n ? ` · reação até ${dataBR(ev.semanas[n - 1].fim, false)} (${n} semana${n === 1 ? '' : 's'})` : '';
+  const reacao = n ? ` · reação até ${dataBR(ev.semanas[n - 1].fim, false)} (${n} semana${n === 1 ? '' : 's'})` : ' · reação em coleta';
   det.textContent = `Anunciada em ${dataBR(ev.data)}${reacao} · `;
   if (ev.fonte_url) {
     const a = el('a', 'notícia de origem');
@@ -145,13 +145,35 @@ function escolherEvento(i) {
   }
   const temSemanas = n > 0;
   for (const id of ['resumo', 'legenda', 'secao-semanas']) document.getElementById(id).hidden = !temSemanas;
+  // Evento recém-cadastrado: explica quando a primeira semana aparece.
+  document.getElementById('aviso-evento').hidden = temSemanas || !estado.dados.classificacao_pronta;
   if (temSemanas) {
     preencherCartao(document.getElementById('card-publico'), ev, 'publico');
     preencherCartao(document.getElementById('card-mercado'), ev, 'mercado');
     desenharSemanas();
     preencherTabelas(ev);
+  } else {
+    document.getElementById('aviso-evento-texto').textContent = textoEventoNovo(ev);
+    document.getElementById('tabelas-semanas').replaceChildren(el('p', 'Ainda não há semanas classificadas para esta decisão.'));
   }
   desenharPrecos(ev);
+}
+
+function somarDias(iso, dias) {
+  const d = new Date(`${iso.slice(0, 10)}T12:00:00Z`);
+  d.setUTCDate(d.getUTCDate() + dias);
+  return d.toISOString().slice(0, 10);
+}
+
+// A semana 1 entra na classificação da primeira sexta depois que ela termina (e depois de hoje).
+function textoEventoNovo(ev) {
+  const fim1 = somarDias(ev.data, 6);
+  const ontem = somarDias(new Date().toISOString().slice(0, 10), -1);   // se hoje é sexta, conta hoje
+  let sexta = somarDias(fim1 > ontem ? fim1 : ontem, 1);
+  while (new Date(`${sexta}T12:00:00Z`).getUTCDay() !== 5) sexta = somarDias(sexta, 1);
+  return `O Radar começou a acompanhar esta decisão. A semana 1 vai de ${dataBR(ev.data, false)} a ${dataBR(fim1, false)}, `
+    + `e a reação aparece aqui depois da classificação de sexta-feira, ${dataBR(sexta, false)}. `
+    + 'Enquanto isso, veja abaixo como o dólar e o Ibovespa se moveram desde o anúncio.';
 }
 
 function escolherPublico(publico) {

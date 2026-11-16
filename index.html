@@ -11,9 +11,9 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
   <!-- ?v= muda a cada nova versão do estilo ou do app.js, para o navegador não misturar
        um arquivo novo com um antigo guardado em cache. Troque a data quando mudar um deles. -->
-  <link rel="stylesheet" href="estilo.css?v=2026-11-16d">
+  <link rel="stylesheet" href="estilo.css?v=2026-11-16e">
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.js" defer></script>
-  <script src="app.js?v=2026-11-16d" defer></script>
+  <script src="app.js?v=2026-11-16e" defer></script>
 </head>
 <body>
   <header class="barra-cf">
@@ -39,6 +39,10 @@
     <section class="evento" aria-live="polite">
       <h2 id="evento-titulo"></h2>
       <p class="evento-detalhe" id="evento-detalhe"></p>
+    </section>
+
+    <section class="cartao aviso-evento" id="aviso-evento" hidden>
+      <p id="aviso-evento-texto"></p>
     </section>
 
     <section class="cartao" id="aviso-classificacao" hidden>
