@@ -13,10 +13,8 @@ const NOMES = {
   mercado: { titulo: 'Mercado', fonte: 'notícias de economia', unidade: 'notícias', artigo: 'as' },
 };
 
-// Aberto direto do computador (file://) para testar: usa os dados já publicados.
-const URL_DADOS = location.protocol === 'file:'
-  ? 'https://devdavicod.github.io/radar-de-reacao-site/dados.json'
-  : 'dados.json';
+// Os dados ficam ao lado da página (o Painel publica os dois juntos).
+const URL_DADOS = 'dados.json';
 
 // Modo incorporado: dentro de um iframe (site da Ceará Finance) ou com ?incorporado=1 no endereço.
 const INCORPORADO = new URLSearchParams(location.search).has('incorporado') || window.self !== window.top;
@@ -110,7 +108,7 @@ async function iniciar() {
     return;
   }
   const d = estado.dados;
-  document.getElementById('atualizado').textContent = `Atualizado em ${dataBR(d.atualizado_em)}`;
+  document.getElementById('atualizado').textContent = `Preços atualizados em ${dataBR(d.atualizado_em)}`;
   document.getElementById('aviso-classificacao').hidden = !!d.classificacao_pronta;
 
   const nav = document.getElementById('eventos');
@@ -134,7 +132,9 @@ function escolherEvento(i) {
   document.getElementById('evento-titulo').textContent = ev.titulo;
   const det = document.getElementById('evento-detalhe');
   const n = ev.semanas.length;
-  det.textContent = `Anunciada em ${dataBR(ev.data)} · ${n} semana${n === 1 ? '' : 's'} acompanhada${n === 1 ? '' : 's'} · `;
+  // A reação só ganha semanas novas na rotina de sexta; os preços mudam todo dia.
+  const reacao = n ? ` · reação até ${dataBR(ev.semanas[n - 1].fim, false)} (${n} semana${n === 1 ? '' : 's'})` : '';
+  det.textContent = `Anunciada em ${dataBR(ev.data)}${reacao} · `;
   if (ev.fonte_url) {
     const a = el('a', 'notícia de origem');
     a.href = ev.fonte_url; a.target = '_blank'; a.rel = 'noopener';
