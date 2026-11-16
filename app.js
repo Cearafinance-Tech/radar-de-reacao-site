@@ -277,10 +277,16 @@ function desenharSemanas() {
         tooltip: {
           filter: (item) => item.parsed.y !== null,
           callbacks: {
-            title: (itens) => tituloSemana(semanas[itens[0].dataIndex]),
+            // Numa semana sem textos, o filtro tira todos os itens: a semana vem do elemento ativo.
+            title(itens) {
+              const i = itens.length ? itens[0].dataIndex : (this.getActiveElements()[0] || {}).index;
+              return i === undefined ? '' : tituloSemana(semanas[i]);
+            },
             label: (c) => ` ${c.dataset.label}: ${num(c.parsed.y, 0)}%`,
-            footer: (itens) => {
-              const r = rs[itens[0].dataIndex];
+            footer(itens) {
+              const i = itens.length ? itens[0].dataIndex : (this.getActiveElements()[0] || {}).index;
+              if (i === undefined) return '';
+              const r = rs[i];
               if (!r.n) return `Sem ${nome.unidade} com posição nesta semana.`;
               return [`${r.n} ${nome.unidade} com posição`].concat(r.amostra_baixa ? ['Poucos textos: leia com cuidado'] : []);
             },
