@@ -1,5 +1,5 @@
 {
- "atualizado_em": "2026-11-23T12:53:38+00:00",
+ "atualizado_em": "2026-11-23T20:59:11+00:00",
  "minimo_semana": 30,
  "teto_video": 0.1,
  "classificacao_pronta": true,
@@ -447,6 +447,11 @@
       "data": "2026-11-19",
       "dolar": 13.7,
       "ibovespa": -9.56
+     },
+     {
+      "data": "2026-11-23",
+      "dolar": 15.28,
+      "ibovespa": -10.34
      }
     ]
    }
@@ -955,6 +960,11 @@
       "data": "2026-11-19",
       "dolar": 14.29,
       "ibovespa": -10.33
+     },
+     {
+      "data": "2026-11-23",
+      "dolar": 15.88,
+      "ibovespa": -11.1
      }
     ]
    }
